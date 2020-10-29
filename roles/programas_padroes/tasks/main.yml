@@ -1,0 +1,75 @@
+# script testado e funcionando    
+
+
+- name: instalando psexec
+  win_chocolatey:
+   name: psexec
+   ignore_checksums: yes
+   state: present
+
+
+- name: Instalar programas comum a todos os usuários 
+  win_chocolatey:
+   name:
+     - jdk8
+  #   - jre8
+     - 7zip.install
+ #    - cutepdf
+     - libreoffice-fresh
+     - pdfxchangeeditor
+     - firefox
+   state: present
+- name: instalando variavel ambiente java
+  win_environment:
+   state: present
+   name: JAVA_HOME
+   value: C:\Program FIles\Java\jdk1.8.0_201
+   level: machine
+
+- name: instalando psexec
+  win_chocolatey:
+   name: psexec
+   ignore_checksums: yes
+   state: present
+
+- name: instalando chrome
+  win_chocolatey:
+   name: googlechrome
+   ignore_checksums: yes
+   state: present
+
+
+
+
+
+- name: Copinado os arquivos necessarios para ativar  o TLS1.2
+  win_copy: src={{item.src}} dest={{item.dest}}
+  with_items:
+      - { src: ativar-TLS12.ps1, dest: '"C:\Temp\"' } 
+
+- name:  "Executando o script ativar TLS1.2"
+  win_command:  powershell.exe .\ativar-TLS12.ps1 
+  args:
+     chdir: C:\Temp\ 
+
+- name: Removendo diretorio 
+  win_file:
+      path: C:\Temp
+      state: absent
+
+- name: Reiniciando
+  win_reboot:
+
+
+
+
+
+
+
+
+
+
+
+
+
+

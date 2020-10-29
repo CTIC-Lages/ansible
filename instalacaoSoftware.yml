@@ -1,0 +1,14 @@
+- hosts: laboratorio_112
+  vars_files:
+     host_vars/laboratorios.yml
+  roles:
+    - programas_padroes
+#    - programas
+#    - processos_industriais
+#    - configurando_time_zone
+#    - auto_desligamento
+#    - papel_de_parede
+#    - configuracao_energia
+#    - GPO
+#    - apagar_usuario
+#    - renomeando_maquina
