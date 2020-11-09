@@ -1,0 +1,7 @@
+# script testado e funcionando
+- name: Aumentando o tempo para desligar o monitor
+  win_command: powercfg /change monitor-timeout-ac 10
+   
+- name: Aumentando o tempo para suspender o computador 
+  win_command: powercfg /change standby-timeout-ac 420
+  

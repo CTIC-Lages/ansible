@@ -1,0 +1,22 @@
+# script testado e funcionando
+- name: Configura servidor NTP para o Windows 1
+  win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers
+    name: 1
+    data: ntp.lages.ifsc.edu.br
+  when: ansible_os_family == 'Windows'
+###################### Fim do NTP Windows
+
+###################### Início da configuracao do UTC Windows
+- name: Configuracao no registro necessaria para UTC - Windows
+  win_regedit:
+    path: HKLM:\System\CurrentControlSet\Control\TimeZoneInformation
+    name: RealTimeIsUniversal
+    data: 1
+    type: dword
+  when: ansible_os_family == 'Windows'
+
+- name: Setar timezone no Windows
+  win_timezone:
+    timezone: E. South America Standard Time
+  when: ansible_os_family == 'Windows'

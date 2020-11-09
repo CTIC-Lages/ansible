@@ -1,0 +1,4 @@
+- name: Eliminando usuários
+  win_user:
+     name: TEMP
+     state: absent

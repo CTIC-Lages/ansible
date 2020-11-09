@@ -1,0 +1,15 @@
+# script testado e funcionando
+- name: desligar os computadores as 23h - Windows
+  win_scheduled_task:
+    name: desliga
+    description: Desligar as 23h
+    actions:
+    - path: shutdown.exe
+      arguments: -s -f -t 0
+    triggers:
+    - type: daily
+      start_boundary: '23:00:00'
+    username: SYSTEM
+    state: present
+    enabled: yes
+    when: ansible_os_family == 'Windows'
