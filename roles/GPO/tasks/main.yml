@@ -1,0 +1,11 @@
+# script testado e funcionando
+- name: enviando para o windows machine
+  win_copy: src={{item.src}} dest={{item.dest}}
+  with_items:
+     - { src: Machine, dest: '"C:\Windows\System32\GroupPolicy\"' } 
+     - { src: User, dest: '"C:\Windows\System32\GroupPolicy\"' } 
+     - { src: gpt.ini, dest: '"C:\Windows\System32\GroupPolicy\"' } 
+- name: fazendo o reboot
+  win_reboot:
+    shutdown_timeout: 0
+    reboot_timeout: 600

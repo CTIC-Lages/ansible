@@ -1,0 +1,17 @@
+# script testado e funcionando
+- name: enviando wallpaper e user para windows 7
+  win_copy: src={{item.src}} dest={{item.dest}}
+  with_items:
+     - { src: IFSC, dest: '"C:\Windows\Web\Wallpaper\"'}
+     - { src: User_Account/Win_7/user.bmp, dest: '"C:\ProgramData\Microsoft\User Account Pictures\"'} 
+  when:
+   - ansible_facts['distribution'] == "Microsoft Windows 7 Professional "
+
+- name: enviando wallpaper e user para windows 10
+  win_copy: src={{item.src}} dest={{item.dest}}
+  with_items:
+     - { src: IFSC, dest: '"C:\Windows\Web\Wallpaper\"'}
+     - { src: User_Account/Win_10/, dest: '"C:\ProgramData\Microsoft\User Account Pictures\"'} 
+  when:
+   - ansible_facts['distribution'] == "Microsoft Windows 10 Pro" or ansible_facts['distribution'] == "Microsoft Windows 10 Pro for Workstations"
+

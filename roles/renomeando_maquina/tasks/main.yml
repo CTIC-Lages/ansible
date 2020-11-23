@@ -1,0 +1,22 @@
+# script testado e funcionando
+
+- name: copiando arquivo
+  win_copy:
+   src: '{{renomear_maquina.lab}}'
+   dest: C:\temp\
+
+- name: "Renomeando o hostname"
+  win_psexec:
+   command: powershell.exe  -file  "C:\Temp\{{renomear_maquina.lab}}" 
+   elevated: yes
+   nobanner: yes
+   username: CTIC
+   password: '{{laboratorio_114.password}}'
+   interactive: yes 
+- name: Reiniciando
+  win_reboot:
+- name: excluindo os arquivos
+  win_file:
+   path: C:\temp\
+   state: absent
+
